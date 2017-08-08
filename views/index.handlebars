@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+    <div class="jumbotron text-center">
+      <h1>Eat-Da-Burger</h1>
+      <small>The (much) less-loved sequel to "Kiss-Da-Girl"</small>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h2>
+            New Burgers!
+          </h2>
+        </div>
+      </div>
+      {{#each burgers}}
+      {{#unless this.devoured}}
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class='btn-toolbar pull-right'>
+              <div class='btn-group'>
+                <form action="/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="true">
+                  <button type='submit' class='btn btn-primary'>Eat-Da-Burger!</button>
+                </form>
+              </div>
+            </div>
+            <h4>
+              {{this.name}}
+            </h4>
+          </div>
+        </div>
+      </div>
+      {{/unless}}
+      {{/each}}
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Add a new burger!</h4>
+          </div>
+          <div class="panel-body">
+            <form class="form-inline" action="/" method="POST">
+              <div class="form-group">
+                <label class="sr-only" for="name">Burger</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Not McDonalds">
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="devoured">Already Devoured?
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary pull-right">Add-Da-Burger!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-5 col-sm-offset-1">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h2>
+            Devoured Burgers!
+          </h2>
+        </div>
+      </div>
+      {{#each burgers}}
+      {{#if this.devoured}}
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class='btn-toolbar pull-right'>
+              <div class='btn-group'>
+                <form action="/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="false">
+                  <button type='submit' class='btn btn-danger'>Throw-up-da-burger!</button>
+                </form>
+              </div>
+            </div>
+            <h4>
+              {{this.name}}
+            </h4>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</div>
